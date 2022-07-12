@@ -1,0 +1,29 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_uni_app (0.0.1):
+    - Flutter
+    - FlutterUniAppMp (= 0.0.3)
+  - FlutterUniAppMp (0.0.3)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_uni_app (from `.symlinks/plugins/flutter_uni_app/ios`)
+
+SPEC REPOS:
+  trunk:
+    - FlutterUniAppMp
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_uni_app:
+    :path: ".symlinks/plugins/flutter_uni_app/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  flutter_uni_app: 584cfc38e2af3df8c959a49147e02c9a7d90bbed
+  FlutterUniAppMp: a43566b984d9687cdcf4f1af20b625793aecdd75
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.11.3
