@@ -1,0 +1,95 @@
+group 'com.example.flutter_uni_app'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.6.10'
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.1.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        flatDir {
+            dirs project(':flutter_uniapp').file('libs')
+        }
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 31
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        minSdkVersion 21
+        ndk {
+            abiFilters 'x86','armeabi-v7a',"arm64-v8a" //不支持armeabi
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
+        }
+    }
+    aaptOptions {
+        additionalParameters '--auto-add-overlay'
+        ignoreAssetsPattern "!.svn:!.git:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation(name: 'android-gif-drawable-release@1.2.23', ext: 'aar')
+    implementation(name: 'base_oaid_sdk', ext: 'aar')
+    implementation(name: 'uniapp-v8-release', ext: 'aar')
+    implementation(name: 'uniMPSDK-V2-release', ext: 'aar')
+
+    //必须添加的依赖
+    implementation "androidx.recyclerview:recyclerview:1.0.0"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation "androidx.appcompat:appcompat:1.0.0"
+    implementation 'com.alibaba:fastjson:1.2.66'
+    implementation 'com.facebook.fresco:fresco:2.5.0'
+    implementation 'com.facebook.fresco:animated-gif:2.5.0'
+    implementation 'com.facebook.fresco:webpsupport:2.5.0'
+    implementation 'com.facebook.fresco:animated-webp:2.5.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.android.support:multidex:1.0.3'
+}
