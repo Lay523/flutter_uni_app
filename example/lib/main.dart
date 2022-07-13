@@ -17,7 +17,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-  final _flutterUniAppPlugin = FlutterUniApp();
 
   @override
   void initState() {
@@ -32,7 +31,7 @@ class _MyAppState extends State<MyApp> {
     // We also handle the message potentially returning null.
     try {
       platformVersion =
-          await _flutterUniAppPlugin.getPlatformVersion() ?? 'Unknown platform version';
+          await FlutterUniApp().platformVersion ?? 'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -48,6 +47,12 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
@@ -55,7 +60,43 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Column(
+            children: [
+              Text('Running on: $_platformVersion\n'),
+              TextButton(onPressed: (){
+                FlutterUniApp().initEngine();
+              }, child: const Text('initEngine')),
+
+              TextButton(onPressed: (){
+                FlutterUniApp().installUniMPResource(appId: "__UNI__11E9B73", wgtPath: "assets/__UNI__11E9B73.wgt");
+              }, child: const Text('installUniMPResource')),
+
+              TextButton(onPressed: ()async{
+                await FlutterUniApp().openUniApp(
+                    appId: "__UNI__11E9B73",
+                    path: "pages/component/button/button",
+                  extras: {
+                      'enableGestureClose':true
+                  }
+                );
+              }, child: const Text('openUniApp')),
+
+              TextButton(onPressed: ()async{
+                final res = await FlutterUniApp().getAppBasePath;
+                print(res);
+              }, child: const Text('getAppBasePath')),
+
+              ///getAppVersion
+              TextButton(onPressed: ()async{
+                final res = await FlutterUniApp().getAppVersion("__UNI__11E9B73");
+                print(res);
+              }, child: const Text('getAppVersion')),
+
+              TextButton(onPressed: (){
+                FlutterUniApp().closeCurrentApp();
+              }, child: const Text('closeCurrentApp')),
+            ],
+          ),
         ),
       ),
     );

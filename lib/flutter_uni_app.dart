@@ -1,8 +1,6 @@
+library flutter_uni_app;
 
-import 'flutter_uni_app_platform_interface.dart';
 
-class FlutterUniApp {
-  Future<String?> getPlatformVersion() {
-    return FlutterUniAppPlatform.instance.getPlatformVersion();
-  }
-}
+export 'src/manager.dart';
+export 'src/event.dart';
+

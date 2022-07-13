@@ -1,6 +1,12 @@
 # flutter_uni_app
 
 
+## [版本说明](https://nativesupport.dcloud.net.cn/README)
+```bash
+IOS: 3.4.18
+Android: 3.4.18
+```
+
 ## Android build.gradle 配置
 ```gradle
 android {
